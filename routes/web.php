@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'App\Http\Controllers\ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'App\Http\Controllers\ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
+	
 	Route::get('/', fn()=>redirect('/home'));
+
+	Route::get('/news', [NewsController::class, 'render'])->name('news.show');
+	Route::post('/news/create', [NewsController::class, 'store'])->name('news.store');
+	Route::get('/news/create', fn()=>view('pages.news.create'))->name('news.create');
+	Route::get('/news/edit/{id}', [NewsController::class, 'edit'])->name('news.edit');
+	Route::delete('/news/{id}', [NewsController::class, 'delete'])->name('news.destroy');
+	Route::put('/news/edit/{id}', [NewsController::class, 'update'])->name('news.update');
+	Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.unique');
 });
 

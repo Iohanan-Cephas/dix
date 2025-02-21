@@ -11,6 +11,12 @@
                     <p>{{ _('Dashboard') }}</p>
                 </a>
             </li>
+            <li @if ($pageSlug == 'index') class="active " @endif>
+                <a href="{{ route('news.show') }}">
+                    <i class="tim-icons icon-paper"></i>
+                    <p>{{ _('News') }}</p>
+                </a>
+            </li>
             <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>
